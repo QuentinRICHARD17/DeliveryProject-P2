@@ -312,30 +312,12 @@
       charCounter.textContent = `${textarea.value.length}/100`;
     });
 
-    // Bouton Publier
+    // Bouton Publier (Désactivé ici car géré dans script.js)
+    /*
     submitBtn.addEventListener('click', () => {
-      if (!capturedDataUrl) {
-        showToast("⚠️ Prenez ou chargez une photo d'abord !");
-        return;
-      }
-      if (textarea.value.trim() === "") {
-        showToast("⚠️ Ajoutez une description !");
-        return;
-      }
-      if (!selectedCategory) {
-        showToast("⚠️ Choisissez une catégorie !");
-        return;
-      }
-
-      showToast("🌿 Publication réussie !");
-
-      // Optionnel : Réinitialiser le formulaire après envoi
-      textarea.value = "";
-      charCounter.textContent = "0/100";
-      catBtns.forEach(b => b.classList.remove('selected'));
-      selectedCategory = null;
-      resetViewfinder();
+      ...
     });
+    */
 
     // Toast Notification Utility
     function showToast(message) {

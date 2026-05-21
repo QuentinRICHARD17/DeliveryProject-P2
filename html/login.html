@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-ACT - Connexion</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .auth-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .auth-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+        .auth-form h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .auth-form .toggle-link {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            cursor: pointer;
+        }
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form" id="loginForm">
+            <h2>Connexion</h2>
+            <div id="loginError" class="error-message">Pseudo ou mot de passe incorrect</div>
+            <input type="text" id="loginPseudo" placeholder="Pseudo" required>
+            <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+            <button onclick="handleLogin()">Se connecter</button>
+            <div class="toggle-link" onclick="toggleAuth()">Pas encore de compte ? S'inscrire</div>
+        </div>
+
+        <div class="auth-form" id="registerForm" style="display: none;">
+            <h2>Inscription</h2>
+            <div id="registerError" class="error-message">Erreur lors de l'inscription</div>
+            <input type="text" id="regPseudo" placeholder="Pseudo" required>
+            <input type="email" id="regEmail" placeholder="Email" required>
+            <input type="password" id="regPassword" placeholder="Mot de passe" required>
+            <button onclick="handleRegister()">S'inscrire</button>
+            <div class="toggle-link" onclick="toggleAuth()">Déjà un compte ? Se connecter</div>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script>
+        function toggleAuth() {
+            const login = document.getElementById('loginForm');
+            const register = document.getElementById('registerForm');
+            if (login.style.display === 'none') {
+                login.style.display = 'block';
+                register.style.display = 'none';
+            } else {
+                login.style.display = 'none';
+                register.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
