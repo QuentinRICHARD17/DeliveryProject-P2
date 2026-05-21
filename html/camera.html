@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>G-ACT — Publier</title>
+</head>
+<body>
+
+<div id="flash-overlay"></div>
+
+<div class="app-page">
+
+  <main class="page-scroll camera-page-scroll">
+
+    <div class="camera-viewfinder" id="viewfinder-box">
+
+      <div id="camera-placeholder">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+        <p style="font-weight: 800; font-size: 14px; margin-bottom: 2px;">Cliquez pour prendre/charger une photo</p>
+        <p style="font-size: 11px; opacity: 0.8;">(Supporte PC, Mobile et fichiers locaux)</p>
+      </div>
+
+      <input type="file" id="camera-file-input" accept="image/*" style="display: none;">
+
+      <video id="webcam" class="camera-feed" autoplay playsinline muted style="display:none;"></video>
+
+      <img id="photo-preview" class="camera-feed" src="" alt="Aperçu capture" style="display: none;">
+
+      <div class="camera-controls-top" id="top-controls">
+        <button class="camera-icon-btn" id="btn-flash" aria-label="Simuler Flash">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-width="2"/></svg>
+        </button>
+        <button class="camera-icon-btn" id="btn-flip" aria-label="Retourner la caméra">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67"/></svg>
+        </button>
+      </div>
+
+      <button id="overlay-retake-btn" class="overlay-action-btn" style="display: none;">
+        <span>Reprendre 🔄</span>
+      </button>
+      <a id="overlay-download-btn" class="overlay-action-btn" style="display: none;" href="#" download="gact-photo.png">
+        <span>Enregistrer 📥</span>
+      </a>
+
+      <div class="camera-shutter-wrap">
+        <button class="camera-shutter" id="camera-shutter" aria-label="Prendre la photo">
+          <div class="camera-shutter-inner"></div>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="camera-form">
+      <div style="position: relative;">
+          <textarea
+                  class="camera-textarea"
+                  id="action-desc"
+                  maxlength="100"
+                  placeholder="Décrivez votre action (max. 100 car.)..."
+                  aria-label="Description de l'action"
+          ></textarea>
+        <span id="char-counter" style="position: absolute; right: 10px; bottom: 8px; font-size: 11px; color: var(--text-light); font-weight: bold;">0/100</span>
+      </div>
+
+      <p class="camera-section-label">Catégories</p>
+      <div class="camera-cats-row">
+        <button class="cat-btn" data-cat="Social" aria-label="Social">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <span>Social</span>
+        </button>
+
+        <button class="cat-btn" data-cat="Écologie" aria-label="Écologie">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <span>Écologie</span>
+        </button>
+
+        <button class="cat-btn" data-cat="Entraide" aria-label="Entraide">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Entraide</span>
+        </button>
+
+        <button class="submit-btn" id="submit-action" aria-label="Publier l'action">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navigation principale">
+
+    <button class="nav-item" data-page="coffre.html" aria-label="Coffre">
+      <img src="../img/icones/iconeCoffre.png" alt="Icône Coffre navigation">
+      <span>Coffre</span>
+    </button>
+
+    <button class="nav-item" data-page="maison.html" aria-label="Fil d'actualité">
+      <img src="../img/icones/iconeMaison.png" alt="Icône Maison navigation">
+      <span>Maison</span>
+    </button>
+
+    <button class="nav-item nav-camera active" data-page="camera.html" aria-label="Publier une action">
+      <img src="../img/icones/iconeAppareilPhoto.png" alt="Icône Appareil photo navigation">
+      <span>Publier</span>
+    </button>
+
+    <button class="nav-item" data-page="compte.html" aria-label="Mon compte">
+      <img src="../img/autres/photoDeProfilDeBase.png" alt="Icône Compte utilisateur navigation">
+      <span>Compte</span>
+    </button>
+
+  </nav>
+
+</div>
+
+<canvas id="photo-canvas" style="display: none;"></canvas>
+
+<script src="../js/script.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let activeStream = null;
+    let currentFacingMode = 'user';
+    let capturedDataUrl = null;
+
+    // Éléments DOM
+    const video = document.getElementById('webcam');
+    const photoPreview = document.getElementById('photo-preview');
+    const canvas = document.getElementById('photo-canvas');
+    const cameraPlaceholder = document.getElementById('camera-placeholder');
+    const cameraFileInput = document.getElementById('camera-file-input');
+    const shutterBtn = document.getElementById('camera-shutter');
+    const flashOverlay = document.getElementById('flash-overlay');
+
+    const btnFlip = document.getElementById('btn-flip');
+    const btnFlash = document.getElementById('btn-flash');
+    const topControls = document.getElementById('top-controls');
+    const overlayDownload = document.getElementById('overlay-download-btn');
+    const overlayRetake = document.getElementById('overlay-retake-btn');
+
+    const textarea = document.getElementById('action-desc');
+    const charCounter = document.getElementById('char-counter');
+    const submitBtn = document.getElementById('submit-action');
+
+    // ─── INITIALISATION CAMERA PHYSIQUE ─────────────────────────
+    async function initCamera() {
+      if (activeStream) {
+        stopCamera();
+      }
+
+      const constraints = {
+        video: {
+          facingMode: currentFacingMode,
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        },
+        audio: false
+      };
+
+      try {
+        activeStream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = activeStream;
+        video.style.display = 'block';
+        cameraPlaceholder.style.display = 'none';
+
+        if (currentFacingMode === 'user') {
+          video.classList.add('mirror-mode');
+        } else {
+          video.classList.remove('mirror-mode');
+        }
+      } catch (err) {
+        console.warn("Accès webcam refusé ou non disponible. Utilisation du plan de secours par fichiers.");
+        video.style.display = 'none';
+        cameraPlaceholder.style.display = 'flex';
+      }
+    }
+
+    function stopCamera() {
+      if (activeStream) {
+        activeStream.getTracks().forEach(track => track.stop());
+        activeStream = null;
+      }
+    }
+
+    // Lancer la caméra directement sur la page unique
+    initCamera();
+
+    // Déclencheur Flash d'écran
+    function runFlashOverlay() {
+      flashOverlay.classList.remove('active-flash');
+      void flashOverlay.offsetWidth; // Force reflow
+      flashOverlay.classList.add('active-flash');
+    }
+
+    // ─── COMPORTEMENT DU BOUTON SHUTTER (PRENDRE LA PHOTO) ─────
+    shutterBtn.addEventListener('click', () => {
+      if (activeStream && video.srcObject) {
+        runFlashOverlay();
+        canvas.width = video.videoWidth || 640;
+        canvas.height = video.videoHeight || 480;
+        const ctx = canvas.getContext('2d');
+
+        if (currentFacingMode === 'user') {
+          ctx.translate(canvas.width, 0);
+          ctx.scale(-1, 1);
+        }
+
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        applyCapturedPhoto(canvas.toDataURL('image/png'));
+      } else {
+        cameraFileInput.click();
+      }
+    });
+
+    // Clique sur le viseur d'importation de secours
+    cameraPlaceholder.addEventListener('click', () => {
+      cameraFileInput.click();
+    });
+
+    // Écouteur sur l'import de fichier image
+    cameraFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          applyCapturedPhoto(event.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Affichage de la photo prise
+    function applyCapturedPhoto(dataUrl) {
+      capturedDataUrl = dataUrl;
+      photoPreview.src = dataUrl;
+      photoPreview.style.display = 'block';
+      video.style.display = 'none';
+      cameraPlaceholder.style.display = 'none';
+
+      // CORRECTION : Masquer les boutons du haut (Flash & Flip) à la capture
+      topControls.style.display = 'none';
+
+      // Liaison de l'action de téléchargement
+      overlayDownload.href = dataUrl;
+      overlayDownload.download = `gact-capture-${Date.now()}.png`;
+
+      overlayDownload.style.display = 'flex';
+      overlayRetake.style.display = 'flex';
+
+      shutterBtn.style.opacity = '0.3';
+      shutterBtn.style.pointerEvents = 'none';
+      showToast("📸 Photo enregistrée !");
+    }
+
+    // Bouton Reprendre
+    overlayRetake.addEventListener('click', (e) => {
+      e.stopPropagation();
+      resetViewfinder();
+    });
+
+    function resetViewfinder() {
+      photoPreview.style.display = 'none';
+      photoPreview.src = '';
+      capturedDataUrl = null;
+
+      overlayDownload.style.display = 'none';
+      overlayRetake.style.display = 'none';
+
+      // CORRECTION : Réafficher les contrôles du haut (Flash & Flip) à la réinitialisation
+      topControls.style.display = 'flex';
+
+      shutterBtn.style.opacity = '1';
+      shutterBtn.style.pointerEvents = 'auto';
+
+      initCamera();
+    }
+
+    // Flip caméra
+    btnFlip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (capturedDataUrl) return;
+      currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
+      initCamera();
+      showToast("🔄 Bascule de l'objectif");
+    });
+
+    // Bouton Flash
+    btnFlash.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (capturedDataUrl) return;
+      runFlashOverlay();
+      showToast("⚡ Flash !");
+    });
+
+    // ─── FORMULAIRE: Compteur & Catégories ───────────────────
+    const catBtns = document.querySelectorAll('.cat-btn');
+    let selectedCategory = null;
+
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedCategory = btn.getAttribute('data-cat');
+      });
+    });
+
+    textarea.addEventListener('input', () => {
+      charCounter.textContent = `${textarea.value.length}/100`;
+    });
+
+    // Bouton Publier
+    submitBtn.addEventListener('click', () => {
+      if (!capturedDataUrl) {
+        showToast("⚠️ Prenez ou chargez une photo d'abord !");
+        return;
+      }
+      if (textarea.value.trim() === "") {
+        showToast("⚠️ Ajoutez une description !");
+        return;
+      }
+      if (!selectedCategory) {
+        showToast("⚠️ Choisissez une catégorie !");
+        return;
+      }
+
+      showToast("🌿 Publication réussie !");
+
+      // Optionnel : Réinitialiser le formulaire après envoi
+      textarea.value = "";
+      charCounter.textContent = "0/100";
+      catBtns.forEach(b => b.classList.remove('selected'));
+      selectedCategory = null;
+      resetViewfinder();
+    });
+
+    // Toast Notification Utility
+    function showToast(message) {
+      const exist = document.querySelector('.toast');
+      if (exist) exist.remove();
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          toast.classList.add('show');
+        });
+      });
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 2200);
+    }
+  });
+</script>
+</body>
+</html>

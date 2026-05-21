@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>G-ACT — Fil d'Actualité</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-page">
+
+    <!-- ── HEADER ─────────────────────────── -->
+    <header class="app-header">
+      <div class="header-capsule">
+        <img src="../img/autres/Gpoints.png" alt="Image de G-Points)">
+        <span>G-Points: 1&nbsp;250</span>
+      </div>
+      <div class="header-capsule">
+        <img src="../img/autres/Flammes.png" alt="Image de Flammes">
+        <span>Flammes: 15 jrs</span>
+      </div>
+    </header>
+
+    <!-- ── MAIN CONTENT ───────────────────── -->
+    <main class="page-scroll">
+
+      <p class="page-eyebrow">Validation Communautaire</p>
+      <p class="page-title">Fil d'actions</p>
+
+      <!-- Feed card -->
+      <article class="feed-card" aria-label="Action de Jules M.">
+
+        <!-- User row -->
+        <div class="feed-user-row">
+          <img class="feed-avatar" src="../img/autres/photoDeProfilDeBase.png" alt="Avatar de l'utilisateur">
+          <div>
+            <div class="feed-username">Jules M.</div>
+            <div class="feed-time">Il y a 3 minutes</div>
+          </div>
+        </div>
+
+        <!-- Action photo -->
+        <div class="feed-photo-wrap">
+          <img src="image.png" alt="image.png (Photo d'une personne ramassant des déchets sur la plage)">
+        </div>
+
+        <!-- Vote row -->
+        <div class="feed-vote-row">
+          <!-- Accept -->
+          <button id="btn-accept" class="vote-btn vote-btn--accept" aria-label="Valider cette action">
+            <img src="image.png" alt="image.png (Check vert de validation)">
+          </button>
+
+          <div class="vote-chevrons">&#171;&#8202;&#8202;&#171;</div>
+          <span style="flex:1; text-align:center; font-size:13px; font-weight:700; color:var(--text-light);">Swipe</span>
+          <div class="vote-chevrons">&#187;&#8202;&#8202;&#187;</div>
+
+          <!-- Reject -->
+          <button id="btn-reject" class="vote-btn vote-btn--reject" aria-label="Rejeter cette action">
+            <img src="image.png" alt="image.png (Croix rouge de rejet)">
+          </button>
+        </div>
+
+        <!-- Info -->
+        <div class="feed-info">
+          <p class="feed-action-title">Nettoyage de plage ensoleillée</p>
+          <span class="feed-tag">#Ecologie</span>
+        </div>
+
+      </article>
+
+    </main>
+
+    <!-- ── BOTTOM NAV ──────────── -->
+    <nav class="bottom-nav" aria-label="Navigation principale">
+
+      <button class="nav-item" data-page="coffre.html" aria-label="Coffre">
+        <img src="../img/icones/iconeCoffre.png" alt="Icône Coffre navigation">
+        <span>Coffre</span>
+      </button>
+
+      <button class="nav-item active" data-page="maison.html" aria-label="Fil d'actualité">
+        <img src="../img/icones/iconeMaison.png" alt="Icône Maison navigation">
+        <span>Maison</span>
+      </button>
+
+      <button class="nav-item nav-camera" data-page="camera.html" aria-label="Publier une action">
+        <img src="../img/icones/iconeAppareilPhoto.png" alt="Icône Appareil photo navigation">
+        <span>Publier</span>
+      </button>
+
+      <button class="nav-item" data-page="compte.html" aria-label="Mon compte">
+        <img src="../img/autres/photoDeProfilDeBase.png" alt="Icône Compte utilisateur navigation">
+        <span>Compte</span>
+      </button>
+
+    </nav>
+
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
