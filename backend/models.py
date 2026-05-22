@@ -16,6 +16,9 @@ class User(Base):
 
     actions = relationship("Action", back_populates="author")
     badges = relationship("Badge", back_populates="user")
+    
+    # Nouvelle table d'association pour les actions vues/votées
+    seen_actions = relationship("Action", secondary="votes", back_populates="voters")
 
 class Action(Base):
     __tablename__ = "actions"
@@ -23,14 +26,21 @@ class Action(Base):
     id = Column(Integer, primary_key=True, index=True)
     author_id = Column(Integer, ForeignKey("users.id"))
     photo_url = Column(String)
-    category = Column(String) # "eco", "social", "help"
+    category = Column(String)
     description = Column(Text)
     created_at = Column(DateTime, server_default=func.now())
     upvotes = Column(Integer, default=0)
     downvotes = Column(Integer, default=0)
-    status = Column(String, default="pending") # "pending", "validated", "rejected"
+    status = Column(String, default="pending")
 
     author = relationship("User", back_populates="actions")
+    voters = relationship("User", secondary="votes", back_populates="seen_actions")
+
+class Vote(Base):
+    __tablename__ = "votes"
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
+    action_id = Column(Integer, ForeignKey("actions.id"), primary_key=True)
+    vote_type = Column(String) # "up", "down", or "seen"
 
 class Friend(Base):
     __tablename__ = "friends"

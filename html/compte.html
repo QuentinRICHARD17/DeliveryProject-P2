@@ -31,64 +31,34 @@
         </div>
       </div>
 
-      <!-- Reputation / Stats -->
-      <div class="compte-section">
-        <p class="compte-section-title">Réputation Globale</p>
-        <div class="rep-row">
-          <span class="rep-label">Score de confiance</span>
-          <span class="rep-pct">70%</span>
+      <!-- Réputation -->
+      <div class="compte-section" id="section-reputation">
+        <p class="compte-section-title">Réputation</p>
+        <div class="reputation-row">
+          <span class="rep-label">Taux de confiance</span>
+          <span class="rep-pct">100%</span>
         </div>
-        <div class="progress-bar-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" aria-label="Réputation à 70%">
+        <div class="progress-bar-track">
           <div class="progress-bar-fill"></div>
         </div>
       </div>
 
       <!-- Pins / Badges -->
-      <div class="compte-section">
-        <p class="compte-section-title">Pins</p>
+      <div class="compte-section" id="section-pins">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <p class="compte-section-title" style="margin-bottom: 0;">Pins</p>
+            <button class="expand-btn" id="expand-pins-btn" onclick="togglePinsExpand()" style="background: none; font-weight: 800; color: var(--green-mid); font-size: 12px; text-transform: uppercase;">Voir tout +</button>
+        </div>
+        <div class="pins-grid" id="pins-grid">
+           <!-- Rempli dynamiquement par script.js -->
+        </div>
+      </div>
 
-        <div class="pins-grid">
-
-          <!-- Badge 1: Gardien du Littoral -->
-          <div class="pin-item">
-            <div class="pin-circle">
-              <img src="image.png" alt="image.png (Pin Gardien du Littoral — badge plage avec vague)">
-            </div>
-            <span class="pin-label">Gardien du Littoral</span>
-          </div>
-
-          <!-- Badge 2: Aide à domicile -->
-          <div class="pin-item">
-            <div class="pin-circle">
-              <img src="image.png" alt="image.png (Pin Aide à domicile — badge maison avec cœur)">
-            </div>
-            <span class="pin-label">Aide à domicile</span>
-          </div>
-
-          <!-- Badge 3: Eco-Curieux -->
-          <div class="pin-item">
-            <div class="pin-circle">
-              <img src="image.png" alt="image.png (Pin Eco-Curieux — badge feuille avec loupe)">
-            </div>
-            <span class="pin-label">Eco-Curieux</span>
-          </div>
-
-          <!-- Badge 4: Slot vide -->
-          <div class="pin-item">
-            <div class="pin-circle pin-circle--empty">
-              <img src="image.png" alt="image.png (Emplacement vide de badge — signe plus gris)">
-            </div>
-            <span class="pin-label" style="color: var(--text-light);">Vide</span>
-          </div>
-
-          <!-- Badge 5: Slot vide -->
-          <div class="pin-item">
-            <div class="pin-circle pin-circle--empty">
-              <img src="image.png" alt="image.png (Emplacement vide de badge — signe plus gris)">
-            </div>
-            <span class="pin-label" style="color: var(--text-light);">Vide</span>
-          </div>
-
+      <!-- Historique des Actions -->
+      <div class="compte-section" id="section-history">
+        <p class="compte-section-title">Mon Historique</p>
+        <div class="history-grid" id="user-history">
+          <p style="font-size: 0.9em; color: #666; padding: 10px;">Aucune action publiée pour le moment.</p>
         </div>
       </div>
 
@@ -97,12 +67,7 @@
     <!-- ── BOTTOM NAV ──────────────────────── -->
     <nav class="bottom-nav" aria-label="Navigation principale">
 
-      <button class="nav-item" data-page="coffre.html" aria-label="Coffre">
-        <img src="../img/icones/iconeCoffre.png" alt="Icône Coffre navigation">
-        <span>Coffre</span>
-      </button>
-
-      <button class="nav-item active" data-page="maison.html" aria-label="Fil d'actualité">
+      <button class="nav-item" data-page="maison.html" aria-label="Fil d'actualité">
         <img src="../img/icones/iconeMaison.png" alt="Icône Maison navigation">
         <span>Maison</span>
       </button>
@@ -112,7 +77,12 @@
         <span>Publier</span>
       </button>
 
-      <button class="nav-item" data-page="compte.html" aria-label="Mon compte">
+      <button class="nav-item" data-page="coffre.html" aria-label="Coffre">
+        <img src="../img/icones/iconeCoffre.png" alt="Icône Coffre navigation">
+        <span>Coffre</span>
+      </button>
+
+      <button class="nav-item active" data-page="compte.html" aria-label="Mon compte">
         <img src="../img/autres/photoDeProfilDeBase.png" alt="Icône Compte utilisateur navigation">
         <span>Compte</span>
       </button>

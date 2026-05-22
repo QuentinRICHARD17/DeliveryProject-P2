@@ -1,0 +1,22 @@
+{
+    "1": { "id": 1, "name": "Boussole Commune", "rarity": "common", "file": "BousoleCommun.png" },
+    "2": { "id": 2, "name": "Cube Commun", "rarity": "common", "file": "CubeCommun.png" },
+    "3": { "id": 3, "name": "Noeud Commun", "rarity": "common", "file": "NoeudCommun.png" },
+    "4": { "id": 4, "name": "Oeuf Commun", "rarity": "common", "file": "OeufCommun.png" },
+    "5": { "id": 5, "name": "Plume Commune", "rarity": "common", "file": "PlumeCommun.png" },
+    "6": { "id": 6, "name": "Boussole Rare", "rarity": "rare", "file": "BousoleRare.png" },
+    "7": { "id": 7, "name": "Cube Rare", "rarity": "rare", "file": "CubeRare.png" },
+    "8": { "id": 8, "name": "Noeud Rare", "rarity": "rare", "file": "NoeudRare.png" },
+    "9": { "id": 9, "name": "Oeuf Rare", "rarity": "rare", "file": "OeufRare.png" },
+    "10": { "id": 10, "name": "Plume Rare", "rarity": "rare", "file": "PlumeRare.png" },
+    "11": { "id": 11, "name": "Boussole Épique", "rarity": "epic", "file": "BousoleEpic.png" },
+    "12": { "id": 12, "name": "Cube Épique", "rarity": "epic", "file": "CubeEpic.png" },
+    "13": { "id": 13, "name": "Noeud Épique", "rarity": "epic", "file": "NoeudEpic.png" },
+    "14": { "id": 14, "name": "Oeuf Épique", "rarity": "epic", "file": "OeufEpic.png" },
+    "15": { "id": 15, "name": "Plume Épique", "rarity": "epic", "file": "PlumeEpic.png" },
+    "16": { "id": 16, "name": "Boussole Légendaire", "rarity": "legendary", "file": "BousoleLegendaire.png" },
+    "17": { "id": 17, "name": "Cube Légendaire", "rarity": "legendary", "file": "CubeLegendaire.png" },
+    "18": { "id": 18, "name": "Noeud Légendaire", "rarity": "legendary", "file": "NoeudLegendaire.png" },
+    "19": { "id": 19, "name": "Oeuf Légendaire", "rarity": "legendary", "file": "OeufLegendaire.png" },
+    "20": { "id": 20, "name": "Plume Légendaire", "rarity": "legendary", "file": "PlumeLegendaire.png" }
+}

@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>G-ACT — Coffre</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+      .info-btn { width: 24px; height: 24px; border-radius: 50%; background: var(--green-mid); color: white; font-weight: bold; font-size: 14px; border: none; cursor: pointer; }
+      .info-panel { padding: 15px; margin-bottom: 20px; font-size: 13px; }
+      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+      .reward-content { padding: 30px; text-align: center; max-width: 300px; width: 100%; animation: popIn 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+      @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      .reward-rarity { font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-bottom: 5px; }
+      .reward-name { font-family: 'Syne'; margin-bottom: 20px; }
+      .reward-img-wrap { width: 120px; height: 120px; margin: 0 auto 20px; filter: drop-shadow(0 0 15px var(--green-light)); }
+      .reward-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
+  </style>
 </head>
 <body>
 
@@ -13,68 +24,86 @@
     <!-- ── HEADER ───────────── -->
     <header class="app-header">
       <div class="header-capsule">
-        <img src="../img/autres/Gpoints.png" alt="Image de G-Points)">
-        <span>G-Points: 1&nbsp;250</span>
+        <img src="../img/autres/Gpoints.png" alt="G-Points">
+        <span>G-Points: <span id="vault-points">0</span></span>
       </div>
       <div class="header-capsule">
-        <img src="../img/autres/Flammes.png" alt="Image de Flammes">
-        <span>Flammes: 15 jrs</span>
+        <img src="../img/autres/Flammes.png" alt="Streak">
+        <span>Streak: <span id="vault-streak">0</span> jrs</span>
       </div>
     </header>
 
-    <!-- ── MAIN CONTENT ───────────────────── -->
+    <!-- ── MAIN CONTENT ────────────────────── -->
     <main class="page-scroll">
 
-      <p class="page-eyebrow">Récompenses</p>
-      <p class="page-title">Mes Coffres</p>
+      <div class="page-eyebrow">Gamification</div>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 18px;">
+          <h1 class="page-title" style="margin-bottom: 0;">Récompenses</h1>
+          <button class="info-btn" onclick="toggleInfo()">?</button>
+      </div>
+
+      <!-- Info Tooltip -->
+      <div id="rarity-info" class="info-panel glass" style="display: none;">
+          <p><strong>Probabilités de drop :</strong></p>
+          <ul style="font-size: 11px; margin-top: 5px; list-style: none;">
+              <li>🟢 <strong>Commun</strong> (100 pts) : 80% C, 15% R, 5% E</li>
+              <li>🔵 <strong>Rare</strong> (250 pts) : 50% C, 40% R, 8% E, 2% L</li>
+              <li>🟣 <strong>Épique</strong> (500 pts) : 20% C, 40% R, 30% E, 10% L</li>
+              <li>🟡 <strong>Légendaire</strong> (1000 pts) : 20% R, 50% E, 30% L</li>
+          </ul>
+      </div>
 
       <div class="coffre-list">
 
-        <!-- Coffre Commun -->
-        <article class="coffre-card coffre-card--common" aria-label="Coffre de Bienveillance Simple">
+        <!-- Chest 1: Common -->
+        <article class="coffre-card coffre-card--common" onclick="handleOpenChest('commun')">
           <div class="coffre-info">
             <p class="coffre-rarity">Commun</p>
-            <p class="coffre-title">Coffre <br>Commun</p>
+            <h2 class="coffre-title">Coffre en Bois</h2>
+            <p class="coffre-sub">Coût : 100 G-Points</p>
             <button class="coffre-open-btn">Ouvrir</button>
           </div>
           <div class="coffre-img-wrap">
-            <img src="../img/autres/CoffreCommun.png" alt="image.png Coffre commun">
+            <img src="../img/autres/CoffreCommun.png" alt="Coffre Commun">
           </div>
         </article>
 
-        <!-- Coffre Rare -->
-        <article class="coffre-card coffre-card--rare" aria-label="Coffre de l'Impact Rare">
+        <!-- Chest 2: Rare -->
+        <article class="coffre-card coffre-card--rare" onclick="handleOpenChest('rare')">
           <div class="coffre-info">
             <p class="coffre-rarity">Rare</p>
-            <p class="coffre-title">Coffre <br>Rare</p>
+            <h2 class="coffre-title">Coffre d'Argent</h2>
+            <p class="coffre-sub">Coût : 250 G-Points</p>
             <button class="coffre-open-btn">Ouvrir</button>
           </div>
           <div class="coffre-img-wrap">
-            <img src="../img/autres/CoffreRare.png" alt="Coffre rare">
+            <img src="../img/autres/CoffreRare.png" alt="Coffre Rare">
           </div>
         </article>
 
-        <!-- Coffre Épique -->
-        <article class="coffre-card coffre-card--epic" aria-label="Coffre Épique">
+        <!-- Chest 3: Epic -->
+        <article class="coffre-card coffre-card--epic" onclick="handleOpenChest('epique')">
           <div class="coffre-info">
             <p class="coffre-rarity">Épique</p>
-            <p class="coffre-title">Coffre<br>Épique</p>
+            <h2 class="coffre-title">Coffre en Or</h2>
+            <p class="coffre-sub">Coût : 500 G-Points</p>
             <button class="coffre-open-btn">Ouvrir</button>
           </div>
           <div class="coffre-img-wrap">
-            <img src="../img/autres/CoffreEpic.png" alt="Coffre épique">
+            <img src="../img/autres/CoffreEpic.png" alt="Coffre Épique">
           </div>
         </article>
 
-        <!-- Coffre Légendaire -->
-        <article class="coffre-card coffre-card--legend" aria-label="Coffre Légendaire">
+        <!-- Chest 4: Legendary -->
+        <article class="coffre-card coffre-card--legend" onclick="handleOpenChest('legendaire')">
           <div class="coffre-info">
             <p class="coffre-rarity">Légendaire</p>
-            <p class="coffre-title">Coffre<br>Légendaire</p>
+            <h2 class="coffre-title">Coffre de Cristal</h2>
+            <p class="coffre-sub">Coût : 1000 G-Points</p>
             <button class="coffre-open-btn">Ouvrir</button>
           </div>
           <div class="coffre-img-wrap">
-            <img src="../img/autres/CoffreLégendaire.png" alt="Coffre légendaire">
+            <img src="../img/autres/CoffreLégendaire.png" alt="Coffre Légendaire">
           </div>
         </article>
 
@@ -82,15 +111,23 @@
 
     </main>
 
+    <!-- Modal Récompense -->
+    <div id="reward-modal" class="modal-overlay" style="display:none;">
+        <div class="reward-content glass">
+            <p class="reward-rarity" id="reward-rarity-text"></p>
+            <h3 class="reward-name" id="reward-name-text">Nouveau Pin !</h3>
+            <p id="reward-duplicate-msg" style="display:none; color: #ff6b6b; font-size: 0.9em; margin-bottom: 15px; font-weight: 700;">Vous avez déjà ce badge... c'est dommage :) 😅</p>
+            <div class="reward-img-wrap">
+                <img id="reward-img" src="" alt="Badge gagné">
+            </div>
+            <button class="reward-confirm-btn" id="reward-confirm-btn" onclick="closeReward()">Super !</button>
+        </div>
+    </div>
+
     <!-- ── BOTTOM NAV ──────────────────────── -->
     <nav class="bottom-nav" aria-label="Navigation principale">
 
-      <button class="nav-item" data-page="coffre.html" aria-label="Coffre">
-        <img src="../img/icones/iconeCoffre.png" alt="Icône Coffre navigation">
-        <span>Coffre</span>
-      </button>
-
-      <button class="nav-item active" data-page="maison.html" aria-label="Fil d'actualité">
+      <button class="nav-item" data-page="maison.html" aria-label="Fil d'actualité">
         <img src="../img/icones/iconeMaison.png" alt="Icône Maison navigation">
         <span>Maison</span>
       </button>
@@ -98,6 +135,11 @@
       <button class="nav-item nav-camera" data-page="camera.html" aria-label="Publier une action">
         <img src="../img/icones/iconeAppareilPhoto.png" alt="Icône Appareil photo navigation">
         <span>Publier</span>
+      </button>
+
+      <button class="nav-item active" data-page="coffre.html" aria-label="Coffre">
+        <img src="../img/icones/iconeCoffre.png" alt="Icône Coffre navigation">
+        <span>Coffre</span>
       </button>
 
       <button class="nav-item" data-page="compte.html" aria-label="Mon compte">
@@ -110,5 +152,15 @@
   </div>
 
   <script src="../js/script.js"></script>
+  <script>
+      function toggleInfo() {
+          const panel = document.getElementById('rarity-info');
+          panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      }
+
+      function closeReward() {
+          document.getElementById('reward-modal').style.display = 'none';
+      }
+  </script>
 </body>
 </html>
